@@ -1,25 +1,29 @@
-import logo from './logo.svg';
 import './App.css';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import {faker} from "@faker-js/faker";
+import {nanoid} from "nanoid";
+import Table from "./components/Table";
+
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+    const loads = []
+    for (let i = 1; i <= 30; i++) {
+        loads.push({
+            id: nanoid(),
+            vehicle: faker.vehicle.vehicle(),
+            zipPU: faker.address.zipCode(),
+            zipDO: faker.address.zipCode(),
+            rate: faker.commerce.price()
+        })
+    }
+
+
+    return (
+        <div className="App">
+            <Table loads={loads}/>
+        </div>
+    );
 }
+
 
 export default App;
